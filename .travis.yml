@@ -1,0 +1,25 @@
+language: go
+go:
+- 1.14.x
+env:
+  matrix:
+  - GO111MODULE=on
+  global:
+    secure: uEjXgFT4Kyii0nIPDm3Mqv57TP88KF3Y4AnMAkUJCawjnL4bJgqA0AxLr5xhh5etc/g5cCuo3IY8dGfoZOebrOS4dFDib6MLqpLTumksOndhG054IQyH5nX/QdsniWxdeVNuTQesu9h5uGm5mb1cgPM/H0JXuOc+9mTwoZJY2msyKXtiSo/GlSdrtx1H5ZGw4T5TwMDWUx0fjt52/k41EGw3RmPbkWGTp+6cYEalagLYRW0YD1ltgIrMlYMOeWTFPGvykUv9S4l3XsNt0F/kJCJiREykklQK4G6//QtXmNKgnr6v1+VKfq9k7V12WXIdxip1HQmqLqBmz7e/l3Jeqk0RQEN3I20KbzaQOMiMVSX01RHIMWMHDvjUZ8hPUHgZ5ITyMmtb0uW9bu/miCqpOWEja27kgHVrOCQosAwIR/Jv1qL+PbAawA92jzl1quSA7e9IG5lIATmMqkcSxfjtBAzd1Ejr7HAoceVtzdoHaFrPNcB1YcMYsc0h62bMCOOLpmvzZsLdbqrPGv9950dU3pcIWLWOfbDW7PL50HamskgCfwjieUoWE2R974x7fWTSoAY2Vk2qul7lsvQ9y4CQVo3q+0QYx7+n9yaM+vjP618BMsPwMrs5qRqQd1B8f9uQx+llHz43/KswmV28sOu2k5PR4NYBKGnfZ4v46XIBWzc=
+script:
+- go test -race -coverprofile=coverage.txt -covermode=atomic
+install:
+- go get -v
+before_deploy: make build-all
+deploy:
+  provider: releases
+  api_key:
+    secure: uEjXgFT4Kyii0nIPDm3Mqv57TP88KF3Y4AnMAkUJCawjnL4bJgqA0AxLr5xhh5etc/g5cCuo3IY8dGfoZOebrOS4dFDib6MLqpLTumksOndhG054IQyH5nX/QdsniWxdeVNuTQesu9h5uGm5mb1cgPM/H0JXuOc+9mTwoZJY2msyKXtiSo/GlSdrtx1H5ZGw4T5TwMDWUx0fjt52/k41EGw3RmPbkWGTp+6cYEalagLYRW0YD1ltgIrMlYMOeWTFPGvykUv9S4l3XsNt0F/kJCJiREykklQK4G6//QtXmNKgnr6v1+VKfq9k7V12WXIdxip1HQmqLqBmz7e/l3Jeqk0RQEN3I20KbzaQOMiMVSX01RHIMWMHDvjUZ8hPUHgZ5ITyMmtb0uW9bu/miCqpOWEja27kgHVrOCQosAwIR/Jv1qL+PbAawA92jzl1quSA7e9IG5lIATmMqkcSxfjtBAzd1Ejr7HAoceVtzdoHaFrPNcB1YcMYsc0h62bMCOOLpmvzZsLdbqrPGv9950dU3pcIWLWOfbDW7PL50HamskgCfwjieUoWE2R974x7fWTSoAY2Vk2qul7lsvQ9y4CQVo3q+0QYx7+n9yaM+vjP618BMsPwMrs5qRqQd1B8f9uQx+llHz43/KswmV28sOu2k5PR4NYBKGnfZ4v46XIBWzc=
+  file_glob: true
+  file: bin/*
+  skip_cleanup: true
+  on:
+    repo: JieTrancender/iv-go
+    tags: true
+after_success:
+- bash <(curl -s https://codecov.io/bash) -t 6cfc1298-5dd6-4958-b553-e26b2fdea603
