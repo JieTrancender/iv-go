@@ -20,3 +20,7 @@ build-all:
 	make build
 	make build-win
 	make build-linux
+
+# 测试
+test:
+	go test -v -race -coverprofile=coverage.txt -covermode=atomic

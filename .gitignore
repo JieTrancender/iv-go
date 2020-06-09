@@ -19,3 +19,5 @@ file/*
 log/*
 
 iv-go
+
+coverage.txt

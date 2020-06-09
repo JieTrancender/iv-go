@@ -17,16 +17,9 @@ type Login struct {
 	Password string `form:"password" json:"password" binding:"required"`
 }
 
-func main() {
-	gin.DisableConsoleColor()
-
-	f, _ := os.Create("log/iv.log")
-	gin.DefaultWriter = io.MultiWriter(f)
-
+func setupRouter() *gin.Engine {
 	router := gin.New()
-
 	// router.Use(gin.Logger())
-
 	router.Use(gin.LoggerWithFormatter(loggerFormatter))
 
 	router.Use(gin.Recovery())
@@ -61,6 +54,7 @@ func main() {
 		names := c.PostFormMap("names")
 
 		fmt.Printf("ids: %v, names: %v", ids, names)
+		c.String(http.StatusOK, fmt.Sprintf("ids: %v, names: %v", ids, names))
 	})
 
 	router.MaxMultipartMemory = 8 << 20 // 8MiB, default is 32MiB
@@ -95,6 +89,17 @@ func main() {
 	}
 
 	router.Static("/static", "./static")
+
+	return router
+}
+
+func main() {
+	gin.DisableConsoleColor()
+
+	f, _ := os.Create("log/iv.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+
+	router := setupRouter()
 
 	server := &http.Server{
 		Addr:           ":8080",
