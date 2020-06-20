@@ -58,3 +58,16 @@ func TestMapPost(t *testing.T) {
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Equal(t, "ids: map[a:1234 b:hello], names: map[first:jane second:jason]", w.Body.String())
 }
+
+// TestUpload 测试上传文件
+func TestUpload(t *testing.T) {
+	// router := setupRouter()
+
+	// w := httptest.NewRecorder()
+	// req, _ := http.NewRequest("POST", "/upload", nil)
+
+	// router.ServeHTTP(w, req)
+
+	// assert.Equal(t, http.StatusOK, w.Code)
+
+}

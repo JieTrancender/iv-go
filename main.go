@@ -8,6 +8,8 @@ import (
 	"os"
 	"time"
 
+	"iv-go/router"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -99,7 +101,8 @@ func main() {
 	f, _ := os.Create("log/iv.log")
 	gin.DefaultWriter = io.MultiWriter(f)
 
-	router := setupRouter()
+	router := router.SetupRouter()
+	// router := setupRouter()
 
 	server := &http.Server{
 		Addr:           ":8080",
