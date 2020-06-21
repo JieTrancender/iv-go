@@ -15,7 +15,7 @@ var DB *gorm.DB
 func Setup() {
 	var err error
 
-	DB, err = gorm.Open("mysql", "root:keyboard@(keyboard-man.site)/iv-go?charset=utf8&parseTime=True&loc=Local&timeout=300ms")
+	DB, err = gorm.Open("mysql", "root:keyboard@(keyboard-man.site)/iv-go?charset=utf8&parseTime=True&loc=Local&timeout=3000ms")
 	if err != nil {
 		log.Printf("Mysql connect error %v", err)
 	}

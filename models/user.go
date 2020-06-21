@@ -34,3 +34,19 @@ func UserDetail(id uint) (user User) {
 	DB.Where("id = ?", id).First(&user)
 	return
 }
+
+// GetUserTotal 获取总用户数
+func GetUserTotal() (int, error) {
+	var count int
+	if err := DB.Model(&User{}).Count(&count).Error; err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
+
+// GetUsers 获取指定页面用户
+func GetUsers(page int, size int) (users []User) {
+	DB.Offset((page - 1) * size).Limit(size).Find(&users)
+	return
+}
