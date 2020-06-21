@@ -19,5 +19,5 @@ func TestWelcome(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.Equal(t, "{\"code\":200,\"data\":{\"content\":\"hello welcome\"},\"message\":\"success\"}", w.Body.String())
+	assert.Equal(t, "{\"code\":200,\"data\":\"hello welcome\",\"message\":\"success\"}", w.Body.String())
 }
