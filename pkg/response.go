@@ -6,9 +6,7 @@ import "github.com/gin-gonic/gin"
 func RespJSON(c *gin.Context, code int, message string, content interface{}) {
 	c.JSON(code, gin.H{
 		"code":    code,
-		"message": "message",
-		"data": gin.H{
-			"content": content,
-		},
+		"message": message,
+		"data":    content,
 	})
 }
