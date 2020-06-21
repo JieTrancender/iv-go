@@ -10,6 +10,8 @@ import (
 
 	"iv-go/router"
 
+	"iv-go/models"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -93,6 +95,10 @@ func setupRouter() *gin.Engine {
 	router.Static("/static", "./static")
 
 	return router
+}
+
+func init() {
+	models.Setup()
 }
 
 func main() {
