@@ -8,6 +8,7 @@ import (
 	"os"
 	"time"
 
+	"iv-go/app"
 	"iv-go/router"
 
 	"iv-go/models"
@@ -98,6 +99,7 @@ func setupRouter() *gin.Engine {
 }
 
 func init() {
+	app.Setup()
 	models.Setup()
 }
 
